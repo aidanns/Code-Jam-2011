@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:stacker/stacker.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:goro-sort/goro-sort.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:candy/candy.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:bot-trust/bot-trust/bot-trust.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:magicka/magicka.xcodeproj">
+   </FileRef>
+</Workspace>

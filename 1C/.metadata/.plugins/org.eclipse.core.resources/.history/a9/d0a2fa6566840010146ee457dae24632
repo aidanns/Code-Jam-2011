@@ -1,0 +1,163 @@
+package com.aidanns.codejam.one_c;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.StringTokenizer;
+
+public class question1 {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		int num_test_cases = 0;
+	    int i = 0;
+	    int j = 0;
+	    int k = 0;
+	    
+	    long min_freq = 0;
+	    long max_freq = 0;
+	    long num_freqs = 0;
+	    
+	    ArrayList<BigInteger> freqs = new ArrayList<BigInteger>();
+	    ArrayList<BigInteger> possibles = new ArrayList<BigInteger>();
+		
+		try {
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			String s = br.readLine();
+			StringTokenizer st = new StringTokenizer(s);
+			
+			num_test_cases = new BigInteger(st.nextToken()).intValue();
+			
+//			System.err.println("Number of test cases: " + num_test_cases);
+			
+			boolean is_okay = true;
+			boolean printed = false;
+			
+			for (k = 0; k < num_test_cases; k++) {
+				
+				printed = false;
+				
+				freqs = new ArrayList<BigInteger>();
+				possibles = new ArrayList<BigInteger>();
+				i = 0;
+				
+			    min_freq = 0;
+			    max_freq = 0;
+			    num_freqs = 0;
+				
+				s = br.readLine();
+				st = new StringTokenizer(s);
+				num_freqs = new BigInteger(st.nextToken()).intValue();
+				min_freq = new BigInteger(st.nextToken()).intValue();
+				max_freq = new BigInteger(st.nextToken()).intValue();
+				
+				
+				
+				
+				s = br.readLine();
+				st = new StringTokenizer(s);
+				for (i = 0; i < num_freqs; i++) {
+					freqs.add(new BigInteger(st.nextToken()));
+				}
+				
+				
+				// START NAIVE
+				
+//				for (i = min_freq; i <= max_freq && printed == false; i++) {
+//					
+//					
+//					is_okay = true;
+//					
+//					for (j = 0; j < freqs.size(); j++) {
+//						if ((((i % freqs.get(j)) !=0) && ((freqs.get(j) % i)!=0))) {
+//							is_okay = false;
+//						}
+//					}
+//					
+//					if (is_okay == true) {
+//						System.out.println("Case #" + (k+1) + ": " + i);
+//						printed = true;
+//					} 
+//					
+//				}
+//				
+//				if (printed == false) {
+//					System.out.println("Case #" + (k+1) + ": NO");
+//				}
+				
+				// END NAIVE
+
+//				
+				// START ORIGINAL
+				
+				Collections.sort(freqs);
+				
+//				System.err.println("freqs (sorted): " + freqs.toString());
+				
+//				int biggest_freq = freqs.get(freqs.size() - 1).intValue();
+//				int first_multiple = 0;
+//				for (i = min_freq; i <= max_freq; i++) {
+//					if (i % biggest_freq == 0 || biggest_freq % i == 0) {
+//						first_multiple = i;
+//						break;
+//					}
+//				}
+//				
+//				System.err.println("first multiple is " + first_multiple);
+//				
+//				if (first_multiple == 0) {
+//					System.out.println("Case #" + (k+1) + ": NO");
+//				} else {
+//					for (i = first_multiple; i < max_freq; i += biggest_freq) {
+//						possibles.add(new BigInteger(i));
+//					}
+				
+					for (long u = min_freq; u <= max_freq; u++) {
+						possibles.add(i);
+					}
+					
+//					System.err.println("possible multiples before evicting are: " + possibles.toString());
+					
+					for (i = freqs.size() - 1; i >= 0; i--) {
+						
+//						System.err.println("evicting multiples that aren't of " + freqs.get(i));
+						
+						for (j = possibles.size() - 1; j >= 0; j--) {
+							
+							
+							if (!(possibles.get(j).longValue() % freqs.get(i).longValue() == 0|| freqs.get(i).longValue() % possibles.get(j).longValue() == 0)) {
+								possibles.remove(j);
+							}
+						}
+						
+//						System.err.println("remaining possibles: " + possibles);
+						
+					}
+					
+//					System.err.println("remaining possibles: " + possibles.toString());
+					
+					// if there is something left then it's the answer
+					if (possibles.size() > 0) {
+						System.out.println("Case #" + (k+1) + ": " + possibles.get(0));
+					} else {
+						System.out.println("Case #" + (k+1) + ": NO");
+					}
+					
+//				}
+				
+				// END ORIGINAL
+				
+//			}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+}
